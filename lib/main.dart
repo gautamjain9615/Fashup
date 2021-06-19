@@ -24,8 +24,6 @@ class MyApp extends StatelessWidget {
         Wishlist.id: (context) => Wishlist(),
         ShoppingCart.id: (context) => ShoppingCart(),
 
-        // RegistrationScreen.id: (context) => RegistrationScreen(),
-        // ChatScreen.id: (context) => ChatScreen(),
       },
     );
   }
