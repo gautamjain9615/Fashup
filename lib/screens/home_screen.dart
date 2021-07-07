@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:carousel_slider/carousel_slider.dart';
+import 'package:fashup/screens/search_screen.dart';
+import 'package:fashup/components/appbar.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 
 class HomeScreen extends StatefulWidget {
   static String id = 'home_screen';
@@ -42,48 +45,18 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
     return Scaffold(
+      appBar: PreferredSize(
+        preferredSize: Size.fromHeight(MediaQuery.of(context).size.height *
+            0.07), // here the desired height
+        child: Custom_Appbar(colour: Colors.white, elev: 8.0),
+      ),
       body: SingleChildScrollView(
         // <-- wrap this around
-
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: <Widget>[
             SizedBox(height: 10),
             //location bar
-            // AppBar(
-            //   title: Column(children: [
-            //     Text(
-            //       'Delhi NCR       ',
-            //       style: TextStyle(
-            //           color: Colors.black,
-            //           fontSize: 15.0,
-            //           fontWeight: FontWeight.bold),
-            //     ),
-            //     Text(
-            //       'Tap to change location',
-            //       style: TextStyle(color: Colors.black45, fontSize: 9.0),
-            //     ),
-            //   ]),
-            //   actions: <Widget>[
-            //     TextButton(
-            //       onPressed: () {},
-            //       child: Text(
-            //         'CHANGE        ',
-            //         style: TextStyle(
-            //             color: Colors.green, fontWeight: FontWeight.bold),
-            //       ),
-            //     )
-            //   ], //<Widget>[]
-            //   backgroundColor: Colors.white,
-            //   // elevation: 50.0,
-            //   leading: IconButton(
-            //     icon: Icon(Icons.location_on),
-            //     color: Colors.redAccent,
-            //     tooltip: 'Location',
-            //     onPressed: () {},
-            //   ), //IconButton
-            //   brightness: Brightness.dark,
-            // ),
             Material(
               elevation: 8.0,
               child: Container(
@@ -106,9 +79,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         children: <Widget>[
                           // first member of container - iconbutton
                           IconButton(
-                            onPressed: () {
-                              print('Icon is pressed');
-                            },
+                            onPressed: () {},
                             icon: Icon(Icons.location_on),
                             // change icon size and color from here
                             iconSize: 25,
@@ -151,9 +122,7 @@ class _HomeScreenState extends State<HomeScreen> {
                           fontWeight: FontWeight.bold,
                         ),
                       ),
-                      onTap: () {
-                        print('Change button is pressed ');
-                      },
+                      onTap: () {},
                     )
                   ],
                 ),
@@ -165,7 +134,7 @@ class _HomeScreenState extends State<HomeScreen> {
               height: 150,
               decoration: BoxDecoration(
                 image: DecorationImage(
-                  fit: BoxFit.fill,
+                  fit: BoxFit.cover,
                   image: ExactAssetImage("images/images.jpg"),
                 ),
               ),
@@ -173,95 +142,45 @@ class _HomeScreenState extends State<HomeScreen> {
                 fit: StackFit.expand,
                 clipBehavior: Clip.none,
                 children: <Widget>[
-                  // for text
-
-                  // for shop button
                   Positioned(
-                      // defining the position of shop button
-                      top: 135, //using the same height of container
-                      left: size.width * 0.15, // using container width/2
-                      child: InkWell(
-                        onTap: () {
-                          print('hello');
-                        },
-                        child: Opacity(
-                          opacity: 0.7,
-                          child: Container(
-                            height: 30.0,
-                            width: size.width * 0.7,
-                            // decoration: BoxDecoration(
-                            //   color: Colors.grey,
-                            // ),
-                            // child: Row(
-                            //   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                            //   children: <Widget>[
-                            //     // Column(
-                            //     //   mainAxisAlignment: MainAxisAlignment.center,
-                            //     //   crossAxisAlignment: CrossAxisAlignment.start,
-                            //     //   children: <Widget>[
-                            //     Text(
-                            //       'Delhi NCR',
-                            //       style: TextStyle(
-                            //         fontWeight: FontWeight.w900,
-                            //         fontSize: 16,
-                            //       ),
-                            //     ),
-                            //     //   ],
-                            //     // ),
-                            //     IconButton(
-                            //       onPressed: () {
-                            //         print('Icon is pressed');
-                            //       },
-                            //       icon: Icon(Icons.location_on),
-                            //       // change icon size and color from here
-                            //       iconSize: 25,
-                            //       color: Colors.red,
-                            //     ),
-                            //   ],
-                            // ),
-                            child: Container(
-                              // alignment: Alignment.center,
-                              // margin: EdgeInsets.symmetric(horizontal: 10),
-                              padding: EdgeInsets.symmetric(
-                                  horizontal: 10, vertical: 2),
-                              decoration: BoxDecoration(
-                                color: Colors.grey.shade300,
-                                borderRadius: BorderRadius.circular(5),
-                                boxShadow: [
-                                  BoxShadow(
-                                    offset: Offset(0, 10),
-                                    blurRadius: 50,
-                                    color: Colors.grey.withOpacity(0.23),
-                                  ),
-                                ],
+                    // defining the position of shop button
+                    top: 130, //using the same height of container
+                    left: size.width * 0.15,
+                    child: GestureDetector(
+                      onTap: () =>
+                          Navigator.pushNamed(context, SearchScreen.id),
+                      child: Container(
+                        width: MediaQuery.of(context).size.width * 0.7,
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.all(
+                            Radius.circular(7.0),
+                          ),
+                          color: Colors.grey.withOpacity(0.5),
+                        ),
+                        child: Padding(
+                          padding:
+                              const EdgeInsets.fromLTRB(15.0, 5.0, 15.0, 5.0),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: <Widget>[
+                              Text('Shop..',
+                                  style: TextStyle(
+                                      fontSize: 20.5,
+                                      fontWeight: FontWeight.w500)),
+                              Icon(
+                                Icons.search_outlined,
+                                size: 23.0,
                               ),
-                              child: Row(
-                                children: <Widget>[
-                                  Expanded(
-                                    child: Center(
-                                      child: TextField(
-                                        onChanged: (value) {},
-                                        decoration: InputDecoration(
-                                          hintText: "Shop...",
-                                          hintStyle: TextStyle(
-                                            color: Colors.black,
-                                          ),
-                                          enabledBorder: InputBorder.none,
-                                          focusedBorder: InputBorder.none,
-                                        ),
-                                      ),
-                                    ),
-                                  ),
-                                  Icon(Icons.search),
-                                ],
-                              ),
-                            ),
+                            ],
                           ),
                         ),
-                      ))
+                      ),
+                    ),
+                  ),
                 ],
               ),
             ),
+
             SizedBox(height: 30),
             SingleChildScrollView(
               scrollDirection: Axis.horizontal,
@@ -593,29 +512,37 @@ class hr extends StatelessWidget {
   final String title;
   @override
   Widget build(BuildContext context) {
-    return Row(children: <Widget>[
-      Expanded(
-          child: Divider(
-        color: Colors.green,
-        height: 20,
-        thickness: 2,
-        indent: 10,
-        endIndent: 10,
-      )),
-      Text(
-        title,
-        style: TextStyle(
-            color: Colors.black, fontWeight: FontWeight.bold, fontSize: 17),
-      ),
-      Expanded(
-          child: Divider(
-        color: Colors.green,
-        height: 25,
-        thickness: 2,
-        indent: 10,
-        endIndent: 10,
-      )),
-    ]);
+    return Padding(
+      padding: EdgeInsets.symmetric(vertical: 5),
+      child:
+          Row(mainAxisAlignment: MainAxisAlignment.center, children: <Widget>[
+        Container(
+          margin: EdgeInsets.only(right: 8),
+          height: 2,
+          width: 60,
+          color: Colors.green,
+        ),
+        Text(
+          title,
+          style: TextStyle(
+              color: Colors.black, fontWeight: FontWeight.bold, fontSize: 17),
+        ),
+        Container(
+          margin: EdgeInsets.only(left: 8),
+          height: 2,
+          width: 60,
+          color: Colors.green,
+        ),
+        // Expanded(
+        //     child: Divider(
+        //   color: Colors.green,
+        //   height: 25,
+        //   thickness: 2,
+        //   indent: 10,
+        //   endIndent: 50,
+        // )),
+      ]),
+    );
   }
 }
 
@@ -668,7 +595,6 @@ class top_carousel_container extends StatelessWidget {
         )
       ],
     );
-    ;
   }
 }
 
@@ -759,7 +685,7 @@ class vendors_spotlight_carousel_container extends StatelessWidget {
           // ),
           new Image.network(
             url,
-            fit: BoxFit.fill,
+            fit: BoxFit.cover,
             width: MediaQuery.of(context).size.width * 0.9,
             height: MediaQuery.of(context).size.width * 0.8,
           ),
@@ -866,7 +792,7 @@ class trending_choices_container extends StatelessWidget {
           decoration: new BoxDecoration(
             shape: BoxShape.circle,
             image: new DecorationImage(
-              fit: BoxFit.fill,
+              fit: BoxFit.cover,
               image: new NetworkImage(url),
             ),
           ),
@@ -915,7 +841,7 @@ class featured_brands_container extends StatelessWidget {
             image: DecorationImage(
                 image: NetworkImage(
                     'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRUwCne75bhNewmpIyqGqTLBixIC_pkBqsocg&usqp=CAU'),
-                fit: BoxFit.fill),
+                fit: BoxFit.cover),
           ),
           //to change container height and width
           height: size.height * 0.27,
@@ -1116,7 +1042,7 @@ class sponsored_brands_carousel_container extends StatelessWidget {
         children: <Widget>[
           new Image.network(
             url,
-            fit: BoxFit.fill,
+            fit: BoxFit.cover,
             width: MediaQuery.of(context).size.width * 0.9,
             height: MediaQuery.of(context).size.width * 0.8,
           ),
