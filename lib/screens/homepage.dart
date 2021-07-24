@@ -1,4 +1,4 @@
-// import 'package:fashup_in/screens/login.dart';
+// import 'package:fashup_in/screens/registration_screen.dart';
 // import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 

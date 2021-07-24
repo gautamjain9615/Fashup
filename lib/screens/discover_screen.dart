@@ -1,4 +1,4 @@
-import 'package:fashup/components/appbar.dart';
+// import 'package:fashup/components/appbar.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:fashup/screens/blog_profile.dart';
@@ -14,13 +14,13 @@ class DiscoverScreen extends StatefulWidget {
 class _DiscoverScreenState extends State<DiscoverScreen> {
   @override
   Widget build(BuildContext context) {
-    Size size = MediaQuery.of(context).size;
+    // Size size = MediaQuery.of(context).size;
     return Scaffold(
-      appBar: PreferredSize(
-        preferredSize: Size.fromHeight(MediaQuery.of(context).size.height *
-            0.07), // here the desired height
-        child: Custom_Appbar(),
-      ),
+      // appBar: PreferredSize(
+      //   preferredSize: Size.fromHeight(MediaQuery.of(context).size.height *
+      //       0.07), // here the desired height
+      //   child: Custom_Appbar(),
+      // ),
       body: Container(
         child: SingleChildScrollView(
           child: Column(
@@ -112,24 +112,25 @@ class _DiscoverScreenState extends State<DiscoverScreen> {
                             ),
                           ),
                           Container(
-                              height: MediaQuery.of(context)
-                                  .size
-                                  .height, //height of TabBarView
+                              height: MediaQuery.of(context).size.height * 0.8 -
+                                  50, //height of TabBarView
                               // decoration: BoxDecoration(
                               //     border: Border(
                               //         top: BorderSide(
                               //             color: Colors.grey, width: 5))),
                               child: TabBarView(children: <Widget>[
                                 Container(
-                                  child: Column(
-                                    children: [
-                                      tabbar_widget(title: "Hello"),
-                                      tabbar_widget(title: "Hello"),
-                                      tabbar_widget(title: "Hello"),
-                                      tabbar_widget(title: "Hello"),
-                                      tabbar_widget(title: "Hello"),
-                                      tabbar_widget(title: "Hello"),
-                                    ],
+                                  child: SingleChildScrollView(
+                                    child: Column(
+                                      children: [
+                                        tabbar_widget(title: "Hello"),
+                                        tabbar_widget(title: "Hello"),
+                                        tabbar_widget(title: "Hello"),
+                                        tabbar_widget(title: "Hello"),
+                                        tabbar_widget(title: "Hello"),
+                                        tabbar_widget(title: "Hello"),
+                                      ],
+                                    ),
                                   ),
                                 ),
                                 Container(
@@ -188,7 +189,7 @@ class top_container extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        Navigator.pushNamed(context, BlogView.id);
+        Navigator.pushNamed(context, BlogPostView.id);
       },
       child: Container(
         margin: EdgeInsets.fromLTRB(15, 12, 10, 5),
@@ -210,7 +211,7 @@ class top_container extends StatelessWidget {
           children: <Widget>[
             Container(
               width: MediaQuery.of(context).size.width * 0.60,
-              // height: MediaQuery.of(context).size.height * 0.1,
+              // height: MediaQuery.of(context).size.height * 0.12,
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.only(
                   topLeft: Radius.circular(10.0),
@@ -223,11 +224,9 @@ class top_container extends StatelessWidget {
                 children: <Widget>[
                   Padding(
                     padding: const EdgeInsets.fromLTRB(10.0, 5.0, 4.0, 5.0),
-                    child: Flexible(
-                      child: Text('How to get cheap stylish products',
-                          style: TextStyle(fontSize: 22.0),
-                          overflow: TextOverflow.clip),
-                    ),
+                    child: Text('How to get cheap stylish products',
+                        style: TextStyle(fontSize: 22.0),
+                        overflow: TextOverflow.clip),
                   ),
                   Padding(
                     padding: const EdgeInsets.fromLTRB(10.0, 0.0, 4.0, 5.0),
@@ -368,7 +367,7 @@ class tabbar_widget extends StatelessWidget {
       child: Material(
         child: GestureDetector(
           onTap: () {
-            Navigator.pushNamed(context, BlogView.id);
+            Navigator.pushNamed(context, BlogPostView.id);
           },
           child: Container(
             width: size.width,
@@ -384,13 +383,13 @@ class tabbar_widget extends StatelessWidget {
                   padding: const EdgeInsets.only(left: 8.0, right: 8.0),
                   child: Container(
                     width: size.width * .25,
-                    // height: size.width * 0.28,
+                    height: size.width * 0.27,
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(10),
                       image: DecorationImage(
-                        fit: BoxFit.fill,
+                        fit: BoxFit.cover,
                         image: NetworkImage(
-                            'https://i.pinimg.com/originals/96/21/2e/96212e6fa677cccd5380e5277898e5ec.jpg'),
+                            'https://images.unsplash.com/photo-1487222477894-8943e31ef7b2?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=426&q=80'),
                       ),
                     ),
                   ),

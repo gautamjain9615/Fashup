@@ -296,7 +296,17 @@ class _BlogPostState extends State<BlogPost> {
                       hr(
                         title: "Related Posts",
                       ),
-                      SizedBox(height: 150)
+                      SingleChildScrollView(
+                        scrollDirection: Axis.horizontal,
+                        child: Row(
+                          children: <Widget>[
+                            related_posts_container(),
+                            related_posts_container(),
+                            related_posts_container(),
+                            related_posts_container()
+                          ],
+                        ),
+                      ),
                     ],
                   ),
                 ),
@@ -547,6 +557,101 @@ class hr extends StatelessWidget {
         //   endIndent: 50,
         // )),
       ]),
+    );
+  }
+}
+
+class related_posts_container extends StatelessWidget {
+  related_posts_container();
+
+  @override
+  Widget build(BuildContext context) {
+    Size size = MediaQuery.of(context).size;
+    return Padding(
+      padding: EdgeInsets.all(10),
+      child: Column(
+        children: <Widget>[
+          Container(
+            width: MediaQuery.of(context).size.width * 0.45,
+            height: MediaQuery.of(context).size.height * 0.17,
+            decoration: BoxDecoration(
+              border: Border.all(color: Colors.black),
+              image: DecorationImage(
+                image: NetworkImage(
+                    'https://images.pexels.com/photos/1004642/pexels-photo-1004642.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500'),
+                fit: BoxFit.cover,
+              ),
+            ),
+          ),
+          Container(
+            width: MediaQuery.of(context).size.width * 0.45,
+            // height: MediaQuery.of(context).size.height * 0.15,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: <Widget>[
+                Container(
+                  // width: MediaQuery.of(context).size.width * 0.65,
+                  // height: MediaQuery.of(context).size.height * 0.1,
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.only(
+                      topLeft: Radius.circular(10.0),
+                      topRight: Radius.circular(10.0),
+                    ),
+                    color: Colors.transparent,
+                  ),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: <Widget>[
+                      Padding(
+                        padding: const EdgeInsets.fromLTRB(8.0, 5.0, 4.0, 0.0),
+                        child: Text(
+                          '+ Fashion',
+                          style: TextStyle(
+                              fontSize: 15.0, color: Colors.redAccent),
+                        ),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.fromLTRB(8.0, 5.0, 4.0, 5.0),
+                        child: Text('How to get cheap stylish products',
+                            style: TextStyle(fontSize: 17.0),
+                            overflow: TextOverflow.clip),
+                      ),
+                    ],
+                  ),
+                ),
+                Container(
+                  // width: MediaQuery.of(context).size.width * 0.4,
+                  // height: MediaQuery.of(context).size.height * 0.05,
+                  decoration: BoxDecoration(
+                    color: Colors.transparent,
+                  ),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    children: <Widget>[
+                      Padding(
+                        padding: EdgeInsets.fromLTRB(3.0, 5.0, 8.0, 5.0),
+                        child: CircleAvatar(
+                          radius: 16.5,
+                          backgroundImage: NetworkImage(
+                              'https://images.pexels.com/photos/4380970/pexels-photo-4380970.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500'),
+                        ),
+                      ),
+                      Column(
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        children: <Widget>[
+                          Text('Prachi Aggarwal',
+                              style: TextStyle(fontSize: 13)),
+                          Text('2.5k Followers', style: TextStyle(fontSize: 13))
+                        ],
+                      )
+                    ],
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ],
+      ),
     );
   }
 }

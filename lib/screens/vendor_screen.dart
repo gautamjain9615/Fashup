@@ -46,11 +46,11 @@ class _VendorScreenState extends State<VendorScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: PreferredSize(
-        preferredSize: Size.fromHeight(MediaQuery.of(context).size.height *
-            0.07), // here the desired height
-        child: Custom_Appbar(),
-      ),
+      // appBar: PreferredSize(
+      //   preferredSize: Size.fromHeight(MediaQuery.of(context).size.height *
+      //       0.07), // here the desired height
+      //   child: Custom_Appbar(),
+      // ),
       body: SingleChildScrollView(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,

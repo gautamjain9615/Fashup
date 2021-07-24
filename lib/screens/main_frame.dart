@@ -6,6 +6,10 @@ import 'package:fashup/screens/home_screen.dart';
 import 'package:fashup/screens/discover_screen.dart';
 import 'package:fashup/screens/wishlist.dart';
 import 'package:fashup/screens/shopping_cart.dart';
+import 'package:fashup/screens/login_screen.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:fashup/screens/bookmarks.dart';
+import 'package:fashup/screens/reviews.dart';
 
 class MainFrame extends StatefulWidget {
   static String id = 'main_frame';
@@ -13,6 +17,8 @@ class MainFrame extends StatefulWidget {
   @override
   _MainFrameState createState() => _MainFrameState();
 }
+
+final _auth = FirebaseAuth.instance;
 
 // class _MainFrameState extends State<MainFrame> {
 //   int _pageIndex = 0;
@@ -399,9 +405,6 @@ class _MainFrameState extends State<MainFrame> {
       'Offers',
     ),
     DiscoverScreen(),
-    Text(
-      'Profile',
-    ),
   ];
   @override
   void initState() {
@@ -414,11 +417,13 @@ class _MainFrameState extends State<MainFrame> {
     _pageController.dispose();
     super.dispose();
   }
+
   // void _onItemTapped(int index) {
   //   setState(() {
   //     _selectedIndex = index;
   //   });
   // }
+  GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey();
 
   @override
   Widget build(BuildContext context) {
@@ -453,11 +458,172 @@ class _MainFrameState extends State<MainFrame> {
           icon: Icon(Icons.menu_rounded),
           color: Colors.black,
           tooltip: 'Menu Icon',
-          onPressed: () {},
+          onPressed: () {
+            if (_scaffoldKey.currentState.isDrawerOpen == false) {
+              _scaffoldKey.currentState.openDrawer();
+            } else {
+              _scaffoldKey.currentState.openEndDrawer();
+            }
+          },
         ), //IconButton
         brightness: Brightness.dark,
       ),
       //AppBar
+      key: _scaffoldKey,
+      drawer: Drawer(
+        // Add a ListView to the drawer. This ensures the user can scroll
+        // through the options in the drawer if there isn't enough vertical
+        // space to fit everything.
+        child: ListView(
+          // Important: Remove any padding from the ListView.
+          padding: EdgeInsets.zero,
+          children: [
+            // const DrawerHeader(
+            //   decoration: BoxDecoration(
+            //     color: Colors.redAccent,
+            //   ),
+            //   child: Center(child: Text("User name")),
+            // ),
+            Container(
+              decoration: BoxDecoration(
+                border: Border(
+                  bottom: BorderSide(width: 2.0, color: Colors.grey),
+                ),
+                color: Colors.redAccent,
+              ),
+              padding: EdgeInsets.fromLTRB(0, 60, 0, 10),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  CircleAvatar(
+                    backgroundImage: NetworkImage(
+                        "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png"),
+                    minRadius: 40,
+                    maxRadius: 40,
+                  ),
+                  Column(
+                    children: [
+                      Text(
+                        "Prachi Agrawal",
+                        style: TextStyle(fontSize: 19),
+                      ),
+                      SizedBox(height: 10),
+                      Text("8884445556"),
+                      Text("ag.pra65@gmail.com")
+                    ],
+                  )
+                ],
+              ),
+            ),
+            SizedBox(height: 7),
+            Row(mainAxisAlignment: MainAxisAlignment.spaceEvenly, children: [
+              GestureDetector(
+                  onTap: () {},
+                  child: Column(children: [
+                    Icon(Icons.edit_outlined),
+                    Text("Edit Profile")
+                  ])),
+              GestureDetector(
+                  onTap: () {
+                    Navigator.pushNamed(context, Bookmarks.id);
+                  },
+                  child: Column(children: [
+                    Icon(Icons.bookmark_outline),
+                    Text("Bookmarks")
+                  ])),
+              GestureDetector(
+                  onTap: () {
+                    Navigator.pushNamed(context, Reviews.id);
+                  },
+                  child: Column(children: [
+                    Icon(Icons.reviews_outlined),
+                    Text("Reviews")
+                  ])),
+              GestureDetector(
+                  onTap: () {},
+                  child: Column(children: [
+                    Icon(Icons.settings_outlined),
+                    Text("Settings")
+                  ])),
+            ]),
+            Divider(
+              color: Colors.grey,
+              thickness: 2,
+            ),
+            ListTile(
+              leading: Icon(Icons.history),
+              title: const Text('Order History'),
+              onTap: () {},
+            ),
+            ListTile(
+              leading: Icon(Icons.map),
+              title: const Text('Track Your Order'),
+              onTap: () {},
+            ),
+            ListTile(
+              leading: Icon(Icons.favorite),
+              title: const Text('Wishlist'),
+              onTap: () {},
+            ),
+            Divider(
+              color: Colors.grey,
+              thickness: 2,
+            ),
+            ListTile(
+              leading: Icon(Icons.shopping_bag),
+              title: const Text('Fashup Galleria'),
+              onTap: () {},
+            ),
+            ListTile(
+              leading: Icon(Icons.payments),
+              title: const Text('Payment methods'),
+              onTap: () {},
+            ),
+            ListTile(
+              leading: Icon(Icons.account_balance_wallet),
+              title: const Text('Wallet'),
+              onTap: () {},
+            ),
+            ListTile(
+              leading: Icon(Icons.credit_card),
+              title: const Text('Saved cards'),
+              onTap: () {},
+            ),
+            Divider(
+              color: Colors.grey,
+              thickness: 2,
+            ),
+            ListTile(
+              leading: Icon(Icons.place),
+              title: const Text('Address'),
+              onTap: () {},
+            ),
+            ListTile(
+              leading: Icon(Icons.group_add),
+              title: const Text('Refer and earn'),
+              onTap: () {},
+            ),
+            ListTile(
+              leading: Icon(Icons.help),
+              title: const Text('Help'),
+              onTap: () {},
+            ),
+            Divider(
+              color: Colors.grey,
+              thickness: 2,
+            ),
+            ListTile(
+              leading: Icon(Icons.logout),
+              title: const Text('Logout'),
+              onTap: () async {
+                await _auth.signOut();
+                Navigator.pushReplacement(context,
+                    MaterialPageRoute(builder: (context) => LoginScreen()));
+              },
+            ),
+          ],
+        ),
+      ),
       // body: _widgetOptions.elementAt(_selectedIndex),
       body: PageView(
         children: tabPages,
@@ -505,10 +671,6 @@ class _MainFrameState extends State<MainFrame> {
             BottomNavigationBarItem(
               label: 'Discover',
               icon: Icon(Icons.trending_up_outlined),
-            ),
-            BottomNavigationBarItem(
-              label: 'My Profile',
-              icon: Icon(Icons.person_outline_rounded),
             ),
           ],
         ),

@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:fashup/screens/search_screen.dart';
 import 'package:fashup/components/appbar.dart';
-import 'package:fluttertoast/fluttertoast.dart';
+import 'package:fashup/screens/login_screen.dart';
 
 class HomeScreen extends StatefulWidget {
   static String id = 'home_screen';
@@ -45,11 +45,12 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
     return Scaffold(
-      appBar: PreferredSize(
-        preferredSize: Size.fromHeight(MediaQuery.of(context).size.height *
-            0.07), // here the desired height
-        child: Custom_Appbar(colour: Colors.white, elev: 8.0),
-      ),
+      // appBar: PreferredSize(
+      //   preferredSize: Size.fromHeight(MediaQuery.of(context).size.height *
+      //       0.07), // here the desired height
+      //   child: Custom_Appbar(colour: Colors.white, elev: 8.0),
+      // ),
+
       body: SingleChildScrollView(
         // <-- wrap this around
         child: Column(
@@ -663,71 +664,45 @@ class vendors_spotlight_carousel_container extends StatelessWidget {
       width: MediaQuery.of(context).size.width * 0.9,
       height: MediaQuery.of(context).size.width * 0.8,
       decoration: BoxDecoration(
+          image: DecorationImage(
+            image: NetworkImage(url),
+            fit: BoxFit.cover,
+          ),
           border: Border.all(
               color: Colors.red, width: 3.0, style: BorderStyle.solid),
           boxShadow: [
             BoxShadow(color: Colors.grey, blurRadius: 4.0, spreadRadius: 4.0)
           ]),
       // image , text and button in stack .
-      child: Stack(
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: <Widget>[
-          // new Positioned.fill(
-          //   child: Image.network(url),
-          // ),
-          // foreground,
-          // FittedBox(
-          //   child: Image.network(url),
-          //   fit: BoxFit.fill,
-          // ),
-          // Image(
-          //   image: NetworkImage(url),
-          //   fit: BoxFit.cover,
-          // ),
-          new Image.network(
-            url,
-            fit: BoxFit.cover,
-            width: MediaQuery.of(context).size.width * 0.9,
-            height: MediaQuery.of(context).size.width * 0.8,
-          ),
-
           // positioned to determine the exact position.
-          Align(
-            alignment: Alignment.topCenter,
-            child: Positioned(
-              // text widget on top of image
-              // left: MediaQuery.of(context).size.width * 0.4,
-              top: 20,
-              child: Column(
-                children: [
-                  Text(
-                    '50-80% OFF',
-                    style: TextStyle(
-                        color: Colors.red,
-                        fontWeight: FontWeight.bold,
-                        fontSize: 18),
-                  ),
-                  Text(
-                    'In Ethnic Wear',
-                    style: TextStyle(
-                        color: Colors.red,
-                        fontWeight: FontWeight.bold,
-                        fontSize: 18),
-                  ),
-                ],
+          Column(
+            children: [
+              Text(
+                '50-80% OFF',
+                style: TextStyle(
+                    color: Colors.red,
+                    fontWeight: FontWeight.bold,
+                    fontSize: 18),
               ),
-            ),
+              Text(
+                'In Ethnic Wear',
+                style: TextStyle(
+                    color: Colors.red,
+                    fontWeight: FontWeight.bold,
+                    fontSize: 18),
+              ),
+            ],
           ),
           // shop now button
-          Align(
-              alignment: Alignment.bottomCenter,
-              // bottom: 8.0,
-              // left: 0,
-              child: Material(
-                color: Colors.transparent,
-                child: custom_button(
-                  text: "Shop Now",
-                ),
-              )),
+          Material(
+            color: Colors.transparent,
+            child: custom_button(
+              text: "Shop Now",
+            ),
+          ),
         ],
       ),
     );

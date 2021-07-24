@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:fashup/components/appbar.dart';
 import 'package:fashup/screens/blogpost_view.dart';
+import 'package:fashup/screens/blogvideo_view.dart';
 
 class BlogProfile extends StatefulWidget {
   static String id = 'blog_profile';
@@ -257,66 +258,69 @@ class _BlogProfileState extends State<BlogProfile> {
 class Videos extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return Stack(
-      children: <Widget>[
-        Container(
-          width: MediaQuery.of(context).size.width * 0.45,
-          height: MediaQuery.of(context).size.height * 0.38,
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.all(
-              Radius.circular(10.0),
-            ),
-            image: DecorationImage(
-              image: NetworkImage(
-                  'https://images.pexels.com/photos/1004642/pexels-photo-1004642.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500'),
-              fit: BoxFit.cover,
+    return GestureDetector(
+      onTap: () {
+        Navigator.pushNamed(context, BlogVideoView.id);
+      },
+      child: Stack(
+        children: <Widget>[
+          Container(
+            width: MediaQuery.of(context).size.width * 0.45,
+            height: MediaQuery.of(context).size.height * 0.38,
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.all(
+                Radius.circular(10.0),
+              ),
+              image: DecorationImage(
+                image: NetworkImage(
+                    'https://images.pexels.com/photos/1004642/pexels-photo-1004642.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500'),
+                fit: BoxFit.cover,
+              ),
             ),
           ),
-        ),
-        Container(
-          width: MediaQuery.of(context).size.width * 0.45,
-          height: MediaQuery.of(context).size.height * 0.38,
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.end,
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: <Widget>[
-              Container(
-                width: MediaQuery.of(context).size.width * 0.65,
-                height: MediaQuery.of(context).size.height * 0.1,
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.only(
-                    topLeft: Radius.circular(10.0),
-                    topRight: Radius.circular(10.0),
+          Container(
+            width: MediaQuery.of(context).size.width * 0.45,
+            height: MediaQuery.of(context).size.height * 0.38,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.end,
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: <Widget>[
+                Container(
+                  width: MediaQuery.of(context).size.width * 0.65,
+                  // height: MediaQuery.of(context).size.height * 0.12,
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.only(
+                      topLeft: Radius.circular(10.0),
+                      topRight: Radius.circular(10.0),
+                    ),
+                    color: Colors.transparent.withOpacity(0.06),
                   ),
-                  color: Colors.transparent.withOpacity(0.06),
-                ),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: <Widget>[
-                    Padding(
-                      padding: const EdgeInsets.fromLTRB(4.0, 5.0, 4.0, 5.0),
-                      child: Flexible(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: <Widget>[
+                      Padding(
+                        padding: const EdgeInsets.fromLTRB(4.0, 5.0, 4.0, 5.0),
                         child: Text('How to get cheap stylish products',
                             style: TextStyle(fontSize: 22.0),
                             overflow: TextOverflow.clip),
                       ),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.fromLTRB(4.0, 0.0, 4.0, 0.0),
-                      child: Text(
-                        '+ Fashion',
-                        style: TextStyle(
-                          fontSize: 17.0,
+                      Padding(
+                        padding: const EdgeInsets.fromLTRB(4.0, 0.0, 4.0, 0.0),
+                        child: Text(
+                          '+ Fashion',
+                          style: TextStyle(
+                            fontSize: 17.0,
+                          ),
                         ),
-                      ),
-                    )
-                  ],
+                      )
+                    ],
+                  ),
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
-        ),
-      ],
+        ],
+      ),
     );
   }
 }
@@ -328,7 +332,7 @@ class Photos extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        Navigator.pushNamed(context, BlogView.id);
+        Navigator.pushNamed(context, BlogPostView.id);
       },
       child: Container(
         height: MediaQuery.of(context).size.height * 0.2,

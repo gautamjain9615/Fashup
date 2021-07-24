@@ -17,70 +17,82 @@ const kStyle = TextStyle(fontSize: 30.0, fontWeight: FontWeight.w600);
 class _CategoriesScreenState extends State<CategoriesScreen> {
   @override
   Widget build(BuildContext context) {
-    return DefaultTabController(
-      length: 2,
-      child: Scaffold(
-        appBar: AppBar(
-          title: GestureDetector(
-              onTap: () {
-                Navigator.push(
-                    context,
-                    new MaterialPageRoute(
-                        builder: (BuildContext context) => new HomeScreen()));
-              },
-              child: Image.asset('images/logo.png', width: 95.0, height: 50.0)),
-          actions: <Widget>[
-            IconButton(
-              icon: Icon(Icons.favorite_border),
-              color: Colors.black,
-              onPressed: () {
-                Navigator.pushNamed(context, Wishlist.id);
-              },
-            ), //IconButton
-            IconButton(
-              icon: Icon(Icons.shopping_cart_outlined),
-              color: Colors.black,
-              onPressed: () {
-                Navigator.pushNamed(context, ShoppingCart.id);
-              },
-            ), //IconButton
-          ], //<Widget>[]
-          backgroundColor: Colors.white,
-          elevation: 8,
-          leading: IconButton(
-            icon: Icon(Icons.menu_rounded),
-            color: Colors.black,
-            tooltip: 'Menu Icon',
-            onPressed: () {},
-          ), //IconButton
-          brightness: Brightness.dark,
-          bottom: TabBar(
-            indicatorColor: Colors.redAccent,
-            labelColor: Colors.redAccent,
-            unselectedLabelColor: Colors.black,
-            // indicatorSize: TabBarIndicatorSize.label,
-            tabs: [
-              Tab(
-                child: Text(
-                  "Primary",
-                  style: TextStyle(fontSize: 23.0),
-                ),
-              ),
-              Tab(
-                child: Text(
-                  'Secondary',
-                  style: TextStyle(fontSize: 23.0),
-                ),
-              )
-            ],
-          ),
-        ),
-        body: TabBarView(
-          children: [
-            Page1(),
-            Page2(),
-          ],
-        ),
+    return Scaffold(
+      // body: Container(
+      //   child: DefaultTabController(
+      //     length: 2,
+      //     child: Column(
+      //       children: [
+      //         TabBar(
+      //           indicatorColor: Colors.redAccent,
+      //           labelColor: Colors.redAccent,
+      //           unselectedLabelColor: Colors.black,
+      //           // indicatorSize: TabBarIndicatorSize.label,
+      //           tabs: [
+      //             Tab(
+      //               child: Text(
+      //                 "Primary",
+      //                 style: TextStyle(fontSize: 23.0),
+      //               ),
+      //             ),
+      //             Tab(
+      //               child: Text(
+      //                 'Secondary',
+      //                 style: TextStyle(fontSize: 23.0),
+      //               ),
+      //             )
+      //           ],
+      //         ),
+      //         TabBarView(
+      //           children: [
+      //             Page1(),
+      //             Page2(),
+      //           ],
+      //         ),
+      //       ],
+      //     ),
+      //   ),
+      // ),
+      body: Container(
+        child: DefaultTabController(
+            length: 2, // length of tabs
+            initialIndex: 0,
+            child: Column(
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                children: <Widget>[
+                  Container(
+                    height: 55,
+                    child: TabBar(
+                      indicatorColor: Colors.redAccent,
+                      labelColor: Colors.redAccent,
+                      unselectedLabelColor: Colors.black,
+                      tabs: [
+                        Tab(
+                          child: Text(
+                            "Primary",
+                            style: TextStyle(fontSize: 23.0),
+                          ),
+                        ),
+                        Tab(
+                          child: Text(
+                            'Secondary',
+                            style: TextStyle(fontSize: 23.0),
+                          ),
+                        )
+                      ],
+                    ),
+                  ),
+                  Expanded(
+                    child: Container(
+                        //height of TabBarView
+                        decoration: BoxDecoration(
+                            border: Border(
+                                top: BorderSide(
+                                    color: Colors.grey, width: 0.5))),
+                        child:
+                            TabBarView(children: <Widget>[Page1(), Page2()])),
+                  )
+                ])),
       ),
     );
   }
