@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "119947054456",
+    "project_id": "fashup-4b232",
+    "storage_bucket": "fashup-4b232.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:119947054456:android:d36e9b52a513b863a44c8d",
+        "android_client_info": {
+          "package_name": "com.fashup.fashup"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "119947054456-f7nglrro1s11k2oucliijhtf8eg1idk1.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBCdz7_loFF29L8cLWmYtupc7O1yAlJTL8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "119947054456-f7nglrro1s11k2oucliijhtf8eg1idk1.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
